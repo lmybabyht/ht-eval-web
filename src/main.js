@@ -2,11 +2,25 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import ViewUI from 'view-design'
+import store from './store/index'
 
 import 'view-design/dist/styles/iview.css';
-Vue.config.productionTip = false
+import {request} from 'network/request'
+
 Vue.use(ViewUI);
+Vue.config.productionTip = false
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')
+
+
+request({
+  method: "get",
+  url: "/public/banners"
+}).then(res =>{
+  console.log('res'+res);
+}).catch(res =>{
+
+})

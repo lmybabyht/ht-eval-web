@@ -40,7 +40,8 @@
         {
           "x-invalid-end-tag": false
         }
-      ]
+      ],
+      "no-unused-vars": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

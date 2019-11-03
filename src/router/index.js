@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Login = () => import('../view/login') 
+const Login = () => import('views/login') 
 
 //1、安装插件
 Vue.use(VueRouter)
@@ -17,7 +17,7 @@ const routes = [
   }
 ]
 const router = new VueRouter( {
-  routes,
+  routes:routes,
   mode: 'history'
 })
 

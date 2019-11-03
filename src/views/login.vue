@@ -57,7 +57,7 @@
               <Form ref="formLogin" :model="formLogin" :rules="ruleLogin" >
                 <FormItem prop="voteCode" >
                     <Input v-model="formLogin.voteCode" size="large" type="text" placeholder="登录请输入您的投票码" >
-                    </Input>    
+                    </Input>
                 </FormItem>
                 <FormItem>
                     <Button type="primary" @click="login('formLogin')" style="font-size: 18px;width: 400px;height: 40px;">登&nbsp;&nbsp;录</Button>
@@ -69,6 +69,7 @@
     </div>
 </template>
 <script>
+    import {request} from 'network/request'
     export default {
         data(){
            const validateCode = (rule, value, callback) => {
@@ -103,6 +104,14 @@
                 if(valid){
                   console.log(valid)
                 }
+              })
+              request({
+                method: "get",
+                url: "/public/banners"
+              }).then(res =>{
+                console.log('res'+res);
+              }).catch(res =>{
+
               })
                 // this.$refs[formLogin].validate((valid) => {
                 //     if(valid){
