@@ -27,12 +27,11 @@ module.exports = {
     port: 9000,
     hotOnly: false,
     proxy : {
-      '/interest':{
-        target: 'http://localhost:9999',
+      '/api':{
+        target: 'http://localhost:9800',
         changeOrigin: true
       } 
     },
-    disableHostCheck: true
   },
   // 第三方插件配置
   pluginOptions: {
