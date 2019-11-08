@@ -1,11 +1,9 @@
 <style >
     .index {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        text-align: center;
+      display: flex;
+      height: 100%;
+      width: 100%;
+      position: absolute;
     }
     .index .ivu-row-flex {
         height: 100%;
@@ -39,14 +37,6 @@
       border-radius:5px;
       text-align:center;
     }
-    .pc-hign{height:75px;display: inline-table;}
-    .name-password-error{
-        padding-bottom: 2px;
-        text-align: left;
-        line-height: 1;
-        color: #ed3f14;
-    }
-    
 </style>
 <template>
     <div class="index">
@@ -56,7 +46,7 @@
             <div class="wrap_form">
               <Form ref="formLogin" :model="formLogin" :rules="ruleLogin" >
                 <FormItem prop="voteCode" >
-                    <Input v-model="formLogin.voteCode" size="large" type="text" placeholder="登录请输入您的投票码" >
+                    <Input v-model="formLogin.voteCode" size="large" type="text" placeholder="请输入您的投票码" >
                     </Input>
                 </FormItem>
                 <FormItem>
@@ -75,50 +65,48 @@
            const validateCode = (rule, value, callback) => {
               let a = 1;
               if (value.length != 8) {
-                  callback(new Error('投票码为8位数字'));
-              }
-              setTimeout(() => {//后台验证投票码
-                if (a < 0) {
-                      callback(new Error('投票码有误'));
-                  } else {
-                      callback()
+                  callback(new Error('投票码为8位数字1'));
+              }else{
+                //请求检验投票码
+                request({
+                  method: 'post',
+                  url: 'checkLogin',
+                  params: {
+                    "voteCode":this.formLogin.voteCode
                   }
-              },1000)
+                }).then(res => {
+                  if (res.code == 1) {
+                    callback(new Error(res.msg));
+                  }else if(res.code == 2){
+                    this.formLogin.voteCode = res.msg
+                    callback()
+                  }
+                }).catch(err => {
+                  console.log('err==='+err)
+                })
+              }
             };
             return {
                 formLogin:{
                     voteCode: ''
                 },
                 ruleLogin: {
-                        voteCode: [
-                            { required: true, message: '请输入您的投票码', trigger: 'blur' },
-                            { pattern: /^[0-9]*$/, message: '投票码为8位数字11', trigger: 'blur' },
-                            { validator: validateCode, trigger: 'blur' }
-                        ]
+                  voteCode: [
+                      { required: true, message: '请输入您的投票码', trigger: 'blur' },
+                      { pattern: /^[0-9]*$/, message: '投票码为8位数字2', trigger: 'blur' },
+                      { validator: validateCode}
+                  ]
                 }
             }
         },
         methods: {
-            login(formLogin){
-              this.$refs[formLogin].validate((valid) => {
-                if(valid){
-                  console.log(valid)
-                }
-              })
-              request({
-                method: "get",
-                url: "/public/banners"
-              }).then(res =>{
-                console.log('res'+res);
-              }).catch(res =>{
-
-              })
-                // this.$refs[formLogin].validate((valid) => {
-                //     if(valid){
-                //         this.$store.dispatch('users/userLogin',{"user_name":this.formLogin.userName,"user_password":this.formLogin.password,"router":this.$router});
-                //     }
-                // })
-            }
+          login(formLogin){
+            this.$refs[formLogin].validate((valid) => {
+              if(valid){
+                this.$store.dispatch('userLogin',{"voteCode":this.formLogin.voteCode,"router":this.$router});
+              }
+            })
+          }
         }
     };
 </script>

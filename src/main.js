@@ -14,13 +14,3 @@ new Vue({
   router,
   store
 }).$mount('#app')
-
-
-request({
-  method: "get",
-  url: "/public/banners"
-}).then(res =>{
-  console.log('res'+res);
-}).catch(res =>{
-
-})

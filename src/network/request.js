@@ -1,8 +1,11 @@
 import axios from 'axios'
+import router from '../router/index'
+
 export function request(config){
   const instance = axios.create({
     baseURL: '/api',
-    timeout: 10000
+    timeout: 10000,
+    responseType: 'json'
   })
   //axios 请求拦截
   instance.interceptors.request.use(config => {
@@ -14,7 +17,10 @@ export function request(config){
   instance.interceptors.response.use(res => {
     return res.data
   },err => {
-
+    console.log(err+"----")
+    router.replace({
+      path: "/error",
+    });
   })
   
   return instance(config)
