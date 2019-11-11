@@ -1,15 +1,14 @@
 <template>
   <div class="header">
-    <div class="title"><h3>年度干部测评在线考核系统</h3></div>
-    <div class="header-info">
-      <ul>
-        <li>单位</li>
-        <li>单位</li>
-      </ul>
-    </div>
-    
-    <!-- <h2>{{this.$store.state.currentUser.voteCode}}</h2>
-    <button @click="loginOut">退出</button> -->
+      <div class="title">年度干部测评在线考核系统</div>
+      <div class="navbar">
+        <ul class="nav">
+          <li :title="this.$store.state.currentUser.voteCode"><b>投票码：</b>{{this.$store.state.currentUser.voteCode}}</li>
+          <li style="width: 12%;"><b>类型：</b><span>{{this.$store.state.currentUser.voteType}}</span></li>
+          <li :title="this.$store.state.currentUser.unitName"><b>单位：</b>{{this.$store.state.currentUser.unitName}}</li>
+          <li id="back_span" @click="loginOut"><i class="fa fa-sign-out"></i> <b>退出系统</b></li>
+        </ul>
+      </div>
   </div>
 </template>
 
@@ -23,36 +22,38 @@ export default {
 }
 </script>
 <style>
- .header{
-    display: flex;
-    background-color: #3C8DBC;
+  .header{
+    background: #3C8DBC;
+    color: #ffffff;
     height: 60px;
-    flex-direction: row;
-    justify-content:center;
+    border: 1px solid  #3C8DBC;
+    border-bottom: 5px solid #f8f8f9;
   }
   .header .title{
-    align-items:center;
-    justify-content:center;
+    width: 99%;
+    margin-top:0.5%; 
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    position:absolute;
   }
-  .header h3{
-     color: #FFF;
-     font-size: 24px;
-     font-weight: 400;
-     height: 100%;
-    
+  .navbar{
+    width: 30%;
+    position:relative;
+    float: right;
+    margin-top: 1.5%;
   }
-  .header-info{
-    flex: 1;
+  .nav ul {
+    right: 0;
+    list-style: none;
   }
-  /* .header-info ul {
-    display: flex;
-    flex-wrap: nowrap;
-    width:60%;
-    margin:0px auto;
-  }*/
-  .header-info ul li{
-    list-style:none;
-  } 
-  
-
+  .nav li {
+    display: block;
+    float:left;
+    width: 24%;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+    overflow: hidden;  
+  }
 </style>

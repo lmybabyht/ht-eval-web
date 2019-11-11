@@ -2,21 +2,20 @@
 #welcome {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  overflow: auto;
-  background-position: center center;
-  box-shadow: 0 0px 3px rgba(0, 0, 0, 0.5);
-  text-align: center;
-}
-#welcome img {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
+  display: flex;
+  justify-content: center;
+} 
+h1 {  
+  margin-top: 200px;
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgb(91, 192, 222);
 }
 </style>
 <template>
     <div id="welcome">
-       <h2>欢迎公司领导使用在线考评系统</h2>
+       <h1>欢迎{{this.$store.state.currentUser.unitName}}使用在线考评系统</h1>
     </div>
 </template>
 <script>

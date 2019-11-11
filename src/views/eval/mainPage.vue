@@ -1,28 +1,15 @@
 <template>
   <div>
-    <div class="header">
-        <div class="ads">
-          
-        </div>
-        <div class="title">
-            <h3>年度干部测评在线考核系统</h3>
-        </div>    
-        <div class="header-btn" >
-            <ul>
-              <li>投票码：{{this.$store.state.currentUser.voteCode}}</li>
-              <li style="width:60px">类型：C</li>
-              <li title="公司领导公司领导公司">单位：公司领导公司领导公司公司领导公司领导</li>
-              <li @click="loginOut" style="cursor: pointer;margin-left:80px;"><Icon type="md-log-out" />退出</li>
-            </ul>
-        </div>
+    <div ref="topInfo">
+        <header-page />
     </div>
-    <div class="demo-split">
-        <Split v-model="split1">
-            <div slot="left" class="demo-split-pane">
-                Left Pane
+    <div class="main" :style="{height: curHeight+ 'px'}">
+        <Split v-model="split">
+            <div slot="left" class="left-div">
+                <project-list />
             </div>
-            <div slot="right" class="demo-split-pane">
-                Right Pane
+            <div slot="right" class="right-div">
+              <router-view ></router-view>
             </div>
         </Split>
     </div>
@@ -30,68 +17,47 @@
 </template>
 
 <script>
+import headerPage from 'views/eval/headerPage'
+import projectList from 'views/eval/projectList'
 export default {
   components: {
-    //"header-Page": headerPage
+    "header-page": headerPage,
+    "project-list": projectList
   },
   data() {
    return {
-     split1: 0.2
+     split: 0.2,
+     curHeight:0
    }
   },
+  mounted() {
+    this.goWelcome();
+    this.getHeight();
+  },
   methods: {
-    loginOut(){
+    loginOut() {
        this.$store.dispatch('loginOUt',{"router":this.$router});
+    },
+    goWelcome() {
+      this.$router.replace('/MainPage/welcome')
+    },
+    getHeight() { 
+        let h = document.documentElement.clientHeight || document.body.clientHeight;
+        let topH = this.$refs.topInfo.offsetHeight;
+        this.curHeight =h - topH -10; //减去页面上固定高度height
     }
   }
-  
 }
 </script>
 <style>
-  .header{
-    display: flex;
-    height: 60px;
-    background: #3C8DBC;
-    color: #ffffff;
-    border-bottom: 5px solid #f8f8f9;
+  .main{
+    border: 1px solid #dcdee2;
   }
-  .header .ads{
-    flex:3
+  .left-div{
+    height: 100%;
   }
-  .header .title{
-    display: flex;
-    flex: 2;
-    align-items:center;
-    justify-content:center;
+  .right-div{
+    height: 100%;
   }
-  .header .title h3{
-    font-size: 24px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight: 400;
-  }
-  .header-btn{
-    flex: 3
-  }
-  .header-btn ul{
-    display: flex;
-    flex-wrap: wrap-reverse;
-    list-style: none;
-    align-items:center;
-    margin-top: 25px;
-  }
-  .header-btn ul li{
-    width: 150px;
-    text-align: center;
-    white-space: nowrap;
-    text-overflow: ellipsis; 
-    overflow: hidden;  
-  }
-  .demo-split{
-      height: 600px;
-      border: 1px solid #dcdee2;
-  }
-  .demo-split-pane{
-      padding: 20px;
-  }
+ 
 </style>

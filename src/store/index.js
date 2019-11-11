@@ -10,6 +10,12 @@ const store = new Vuex.Store({
       get voteCode() {
         return localStorage.getItem("voteCode");
       },
+      get unitName() {
+        return localStorage.getItem("unitName");
+      },
+      get voteType() {
+        return localStorage.getItem("voteType");
+      },
       get UserToken() {
         return localStorage.getItem("user_token");
       }
@@ -24,9 +30,11 @@ const store = new Vuex.Store({
     setLoginFalse(state) {
       state.ifLogin = false;
     },
-    setUser(state, { voteCode, user_token}) {
+    setUser(state, { voteCode, unitName, voteType, user_token}) {
       // 在这里把用户名和token保存起来
       localStorage.setItem("voteCode", voteCode);
+      localStorage.setItem("unitName", unitName);
+      localStorage.setItem("voteType", voteType);
       localStorage.setItem("user_token", user_token);
     },
     clearUser(state) {
@@ -42,11 +50,16 @@ const store = new Vuex.Store({
           voteCode: voteCode
         }
       }).then(res => {
+        console.log(res.body.voteTypeName.length - 1);
+        const voteType = res.body.voteTypeName.substring(res.body.voteTypeName.indexOf("("),res.body.voteTypeName.length);
+        console.log(voteType);
         context.commit("setUser",{
-          voteCode: voteCode,
-          user_token: res.body.token,
+          voteCode: res.body.voteCode,
+          unitName: res.body.unitName,
+          voteType: voteType,
+          user_token: res.body.voteCodeToken,
         })
-        router.push({ path: "/mainPage" });
+        router.replace({ path: "/mainPage" });
         context.commit("setLoginTrue")
       }).catch(err => {
 

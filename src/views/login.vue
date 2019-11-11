@@ -75,14 +75,13 @@
                     "voteCode":this.formLogin.voteCode
                   }
                 }).then(res => {
+                  console.log(res);
                   if (res.code == 1) {
                     callback(new Error(res.msg));
                   }else if(res.code == 2){
                     this.formLogin.voteCode = res.msg
                     callback()
                   }
-                }).catch(err => {
-                  console.log('err==='+err)
                 })
               }
             };

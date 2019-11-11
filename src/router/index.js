@@ -4,6 +4,8 @@ import ViewUI from 'view-design'
 const Login = () => import('views/login') 
 const MainPage = () => import('views/eval/mainPage') 
 const Error =() => import('views/error404')
+const welcome =() => import('views/eval/welcome')
+
 //1、安装插件
 Vue.use(VueRouter)
 
@@ -21,7 +23,13 @@ const routes = [
     meta: {
         title: '主信息'
     },
-    component: MainPage
+    component: MainPage,
+    children: [
+      {
+        path: 'welcome',
+        component: welcome
+      }
+    ]
   },
   {
     path: "/error",
