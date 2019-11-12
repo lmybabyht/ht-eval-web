@@ -50,9 +50,7 @@ const store = new Vuex.Store({
           voteCode: voteCode
         }
       }).then(res => {
-        console.log(res.body.voteTypeName.length - 1);
         const voteType = res.body.voteTypeName.substring(res.body.voteTypeName.indexOf("("),res.body.voteTypeName.length);
-        console.log(voteType);
         context.commit("setUser",{
           voteCode: res.body.voteCode,
           unitName: res.body.unitName,
@@ -74,7 +72,7 @@ const store = new Vuex.Store({
           voteCode: this.state.currentUser.voteCode
         }
       }).then(res => {
-        router.push({ path: "/" });
+        router.replace({ path: "/" });
         context.commit("clearUser");
       })
     }

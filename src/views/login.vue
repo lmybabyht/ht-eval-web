@@ -63,9 +63,8 @@
     export default {
         data(){
            const validateCode = (rule, value, callback) => {
-              let a = 1;
               if (value.length != 8) {
-                  callback(new Error('投票码为8位数字1'));
+                  callback(new Error('投票码为8位数字'));
               }else{
                 //请求检验投票码
                 request({
@@ -92,8 +91,8 @@
                 ruleLogin: {
                   voteCode: [
                       { required: true, message: '请输入您的投票码', trigger: 'blur' },
-                      { pattern: /^[0-9]*$/, message: '投票码为8位数字2', trigger: 'blur' },
-                      { validator: validateCode}
+                      { pattern: /^[0-9]*$/, message: '投票码为8位数字', trigger: 'blur' },
+                      { validator: validateCode, trigger: 'blur'}
                   ]
                 }
             }

@@ -6,7 +6,7 @@
           <li :title="this.$store.state.currentUser.voteCode"><b>投票码：</b>{{this.$store.state.currentUser.voteCode}}</li>
           <li style="width: 12%;"><b>类型：</b><span>{{this.$store.state.currentUser.voteType}}</span></li>
           <li :title="this.$store.state.currentUser.unitName"><b>单位：</b>{{this.$store.state.currentUser.unitName}}</li>
-          <li id="back_span" @click="loginOut"><i class="fa fa-sign-out"></i> <b>退出系统</b></li>
+          <li class="back_span" @click="loginOut"><i class="fa fa-sign-out"></i> <b>退出系统</b></li>
         </ul>
       </div>
   </div>
@@ -55,5 +55,8 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis; 
     overflow: hidden;  
+  }
+  .back_span{
+    cursor: pointer;
   }
 </style>

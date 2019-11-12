@@ -8,7 +8,7 @@
             <div slot="left" class="left-div">
                 <project-list />
             </div>
-            <div slot="right" class="right-div">
+            <div slot="right" class="right-div" ref="rightInfo">
               <router-view ></router-view>
             </div>
         </Split>
@@ -31,20 +31,16 @@ export default {
    }
   },
   mounted() {
-    this.goWelcome();
     this.getHeight();
   },
   methods: {
     loginOut() {
        this.$store.dispatch('loginOUt',{"router":this.$router});
     },
-    goWelcome() {
-      this.$router.replace('/MainPage/welcome')
-    },
     getHeight() { 
         let h = document.documentElement.clientHeight || document.body.clientHeight;
         let topH = this.$refs.topInfo.offsetHeight;
-        this.curHeight =h - topH -10; //减去页面上固定高度height
+        this.curHeight =h - topH -15; //减去页面上固定高度height
     }
   }
 }
@@ -58,6 +54,7 @@ export default {
   }
   .right-div{
     height: 100%;
+    padding: 5px 10px 0 15px
   }
  
 </style>

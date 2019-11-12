@@ -17,10 +17,11 @@ export function request(config){
   instance.interceptors.response.use(res => {
     return res.data
   },err => {
-    router.replace({
+    console.log(err);
+    router.push({
       path: "/error",
     });
-  })
+  });
   
   return instance(config)
 }
