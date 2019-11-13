@@ -61,17 +61,16 @@ export default {
 
       const project = this.projectList[index];
       let url = "/MainPage";
-      if(project.projTemplate.tmplType == 1){//分值
-        url += "/score" ; 
-      }else if(project.projTemplate.tmplType == 2){//选项
-        url += "/select" ; 
+      if(project.projTemplate.tmplType == 1 || project.projTemplate.tmplType == 2){//分值 //选项
+        url += "/scoreOrselect" ; 
       }else{
         url += "/recommend" ; 
       }
       this.$router.push({
         path: url,
         query: {
-          projectId: project.id
+          projectId: project.id,
+          tmplType: project.projTemplate.tmplType
         }
       });
     }

@@ -5,9 +5,10 @@ const Login = () => import('views/login')
 const MainPage = () => import('views/eval/mainPage') 
 const Error =() => import('views/error404')
 const welcome =() => import('views/eval/welcome')
-const score =() => import('views/eval/template/score')
-const select =() => import('views/eval/template/select')
+const scoreOrselect =() => import('views/eval/template/scoreOrselect')
 const recommend =() => import('views/eval/template/recommend')
+const tempScore =() => import('views/eval/template/tempScore')
+const tempSelect=() => import('views/eval/template/tempSelect')
 
 //1、安装插件
 Vue.use(VueRouter)
@@ -37,12 +38,17 @@ const routes = [
         component: welcome
       },
       {
-        path: 'score',
-        component: score
+        path: 'scoreOrselect',
+        component: scoreOrselect
       },
       {
-        path: 'select',
-        component: select
+        path: 'tempScore',
+        name: 'tempScore',
+        component: tempScore
+      },
+      {
+        path: 'tempSelect',
+        component: tempSelect
       },
       {
         path: 'recommend',

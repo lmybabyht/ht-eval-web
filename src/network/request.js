@@ -4,7 +4,7 @@ import router from '../router/index'
 export function request(config){
   const instance = axios.create({
     baseURL: '/api',
-    timeout: 10000,
+    //timeout: 10000,
     responseType: 'json'
   })
   //axios 请求拦截

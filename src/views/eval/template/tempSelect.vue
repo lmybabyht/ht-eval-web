@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h2>select</h2>
+    <h1>选项测评</h1>
   </div>
 </template>
-
 <script>
 export default {
 
